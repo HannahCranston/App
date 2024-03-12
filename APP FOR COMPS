@@ -17,7 +17,7 @@ def open_lesson(title, content, notebook):
 
     ttk.Label(lesson_frame, text=f"{title} Lesson", font=('Arial', 16, 'bold')).pack(pady=10)
     ttk.Label(lesson_frame, text=content, font=('Arial', 12), wraplength=400, justify="left").pack(padx=10, pady=10)
-
+ANYTHING WITH THE QUESTION BUTTON MAKE THIS AND CHANGE IT 
 def open_questions(notebook):
     questions_frame = ttk.Frame(notebook)
     notebook.add(questions_frame, text="Practice Questions")
