@@ -1,4 +1,4 @@
-mport tkinter as tk
+Import tkinter as tk
 from tkinter import messagebox, ttk
 import webbrowser
 
@@ -25,66 +25,8 @@ def open_questions(notebook):
     back_button = ttk.Button(questions_frame, text="Back", command=lambda: notebook.forget(notebook.index(questions_frame)))
     back_button.pack(side="top", anchor="nw", padx=10, pady=10)
 
-    ttk.Label(questions_frame, text="Practice Questions", font=('Arial', 16, 'bold')).pack(pady=10)
-
-    # Example questions for Lesson 1
-    lesson1_practice_questions = [
-        "Express in rectangular form:\nQuestion i) 5∠65∘,3.8",
-        "Express in rectangular form:\nQuestion ii) ,7.2∠-56∘",
-        "Express in rectangular form:\nQuestion iii) 15∠-138∘"
-    ]
-    lesson1_answers_text = "(i)  (2.1,4.3)\n(ii)  (-2.1,3.15)\n(iii)  (4.03,-5.97)"
-
-    
-    lesson2_practice_questions = [
-        "Express in polar form:\nQuestion i) (5,2)",
-        "Express in polar form:\nQuestion ii) (3,7)"
-    ]
-    lesson2_answers_text = "Question i  (5.38∠21.8∘)\nQuestion ii (7.61∠66.8∘)"
-
-    
-    lesson1_frame = ttk.Frame(questions_frame)
-    notebook_lesson1 = ttk.Notebook(lesson1_frame)
-
-    create_question_tab(notebook_lesson1, "Lesson 1", lesson1_practice_questions, lesson1_answers_text)
-    create_question_tab(notebook_lesson1, "Lesson 2", lesson2_practice_questions, lesson2_answers_text)
-
     notebook_lesson1.pack(fill="both", expand=True)
     lesson1_frame.pack(pady=20)
-
-    
-    
-
-def create_question_tab(notebook, title, questions, answers_text):
-    frame = ttk.Frame(notebook)
-    notebook.add(frame, text=title)
-
-    for question in questions:
-        ttk.Label(frame, text=question, font=('Arial', 12)).pack(pady=5)
-
-    answer_entries = []
-    for _ in range(len(questions)):
-        ttk.Label(frame, text="Your Answer:").pack(pady=5)
-
-        entry = ttk.Entry(frame)
-        entry.pack(pady=5)
-        answer_entries.append(entry)
-
-    ttk.Button(frame, text="Submit", command=lambda: check_answer(answers_text, answer_entries)).pack(pady=10)
-
-def check_answer(correct_answers_text, answer_entries):
-    try:
-        user_answers = [entry.get() for entry in answer_entries]
-        correct_answers = [answer.strip() for answer in correct_answers_text.split("\n")]
-
-        if user_answers == correct_answers:
-            messagebox.showinfo("Correct!", "Well done!")
-        else:
-            correct_answers_str = "\n".join(correct_answers)
-            messagebox.showinfo("Incorrect", f"Sorry, the correct answers are:\n{correct_answers_str}")
-    except ValueError:
-        messagebox.showerror("Invalid Input", "Please enter valid values.")
-
 def main():
     root = tk.Tk()
     root.geometry("700x600")
@@ -94,17 +36,14 @@ def main():
     notebook = ttk.Notebook(root)
     notebook.pack(fill="both", expand=True)
 
-    
-    lesson1_content = (
-        "This lesson we will learn how to convert polar to cartesian.\n"
+    lesson1_content = 
+("This lesson we will learn how to convert polar to cartesian.\n"
         "Cartesian coordinates are given by the following formulas:\n"
         "x = r cosθ\n"
-        "y = r sinθ"
-    )
+        "y = r sinθ")
     ttk.Button(root, text="Lesson 1", command=lambda: open_lesson("Lesson 1", lesson1_content, notebook)).pack(pady=20)
 
-    lesson2_content = (
-        "This lesson will teach you how to convert cartesian to polar.\n"
+    lesson2_content = ("This lesson will teach you how to convert cartesian to polar.\n"
         "Given a point P = (x, y), the value of r is given by r = √(x^2 + y^2).\n"
         "Given a point P = (x, y), the value of r is given by r = √(x^2 + y^2).\n"
         "The value of degrees is given by the following:\n\n"
@@ -114,19 +53,18 @@ def main():
         "arctan(y/x) - π if x < 0 and y < 0,\n"
         "π/2 if x = 0 and y > 0,\n"
         "-π/2 if x = 0 and y < 0,\n"
-        "Undefined if x = 0 and y = 0."
-    )
-    ttk.Button(root, text="Lesson 2", command=lambda: open_lesson("Lesson 2", lesson2_content, notebook)).pack(pady=20)
+        "Undefined if x = 0 and y = 0.")
+   
 
-    ttk.Button(root, text="External Explanation", command=lambda: open_url('https://example.com')).pack(pady=20)
+      ttk.Button(root, text="Lesson 2", command=lambda: open_lesson("Lesson 2", lesson2_content, notebook)).pack(pady=20)
 
-    tk.Button(root, text="Go here for further help", command=lambda: open_url('https://nucinkis-lab.cc.ic.ac.uk/HELM/HELM_Workbooks_16-20/WB17-all.pdf')).pack(pady=20)
+      ttk.Button(root, text="External Explanation", command=lambda: open_url('https://example.com')).pack(pady=20)
 
-    ttk.Button(root, text="Practice Questions", command=lambda: open_questions(notebook)).pack(pady=20)
+      tk.Button(root, text="Go here for further help", command=lambda: open_url('https://nucinkis-lab.cc.ic.ac.uk/HELM/HELM_Workbooks_16-20/WB17-all.pdf')).pack(pady=20)
 
-    ttk.Label(root, text="Made by a student at the University of Southampton", font=('Arial', 10)).pack(side="bottom", pady=10)
+      ttk.Label(root, text="Made by a student at the University of Southampton", font=('Arial', 10)).pack(side="bottom", pady=10)
 
-    root.mainloop()
+      root.mainloop()
 
 if __name__ == "__main__":
     main()
