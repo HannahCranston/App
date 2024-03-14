@@ -1,54 +1,95 @@
-import math
+import tkinter
+from tkinter import *
 
-def polar_conversion():
-    x = input("Input the value of x: ")
-    y = input("Input the value of y: ")
-    floatx = float(x)
-    floaty = float(y)
-    r = (((floatx**2)+(floaty**2))**(1/2))
+menu = tkinter.Tk()
+
+def correctAnswer():
     
-    if floatx > 0:
-        angleRadians = math.atan(floaty/floatx)
-    elif floatx < 0 and floaty >= 0:
-        angleRadians = (math.atan(floaty/floatx)+(math.pi))
-    elif floatx < 0 and floaty < 0:
-        angleRadians = (math.atan(floaty/floatx)-(math.pi))
-    elif floatx == 0 and floaty > 0:
-        angleRadians = ((math.pi)/2)
-    elif floatx == 0 and floaty < 0:
-        angleRadians = -1*((math.pi)/2)
+    correctAns = tkinter.Message(menu, text="Correct! Please progress to the next question.")
+    correctAns.grid(row=6, column=5)
+    
+    progressButton = tkinter.Button(menu, text="Next question", width=20, font=("Arial", 15))
+    progressButton.grid(row=7, column=7)
+
+def wrongAnswerRadius():
+    
+    wrongAnsr = tkinter.Message(menu, text="Your answer for r is incorrect, please try again.") 
+    wrongAnsr.grid(row=6, column=5)
+
+def wrongAnswerTheta():
+    
+    wrongAnst = tkinter.Message(menu, text="Your answer for theta is incorrect, please try again.")
+    wrongAnst.grid(row=6, column=5)
+
+def wrongAnswerBoth():
+    
+    wrongBoth = tkinter.Message(menu, text="Both of your answers are incorrect. Please try again.")
+    wrongBoth.grid(row=6, column=5)
+
+def otherInput():
+    
+    otherInp = tkinter.Message(menu, text="Please input a valid number.")
+    otherInp.grid(row=6, column=5)
+    
+def submitButton():
+    
+    rInput = float(inp_3.get()) if inp_3.get() else None
+    thetaInput = float(inp_4.get()) if inp_4.get() else None
+    
+    if rInput==13 and thetaInput==1.18:
+        correctAnswer()
+    elif rInput==13 and thetaInput!=1.18:
+        wrongAnswerTheta()
+    elif rInput!=13 and thetaInput==1.18:
+        wrongAnswerRadius()
+    elif rInput!=13 and thetaInput!=1.18:
+        wrongAnswerBoth()
     else:
-        angleRadians = print("Undefined")
+        otherInput()
+
+def question():
+    
+    global inp_3
+    global inp_4
+    
+    menu.geometry("700x450")
+    menu.title("Chapter 1 questions")
+    
+    label_1 = Label(menu, text="X", font=("Arial", 25), width=20, height=5)
+    label_1.grid(row=0, column=0)
+    
+    first_variable = StringVar()
+    first_variable.set("5")
+    inp_1 = tkinter.Entry(menu, textvariable = first_variable, state = DISABLED, width=30, font=("Arial", 25))
+    inp_1.grid(row=0, column=1)
+    
+    label_2 = Label(menu, text="Y", font=("Arial", 25), width=20, height=5)
+    label_2.grid(row=1, column= 0)
+    
+    second_variable = StringVar()
+    second_variable.set("12")
+    inp_2 = tkinter.Entry(menu, textvariable = second_variable, state = DISABLED, width=30, font=("Arial", 25))
+    inp_2.grid(row=1, column=1)
+    
+    label_3 = Label(menu, text="r", font=("Arial", 25), width=20, height=5)
+    label_3.grid(row=3, column=0)
+    
+    inp_3 = tkinter.Entry(menu, width=30, font=("Arial", 25))
+    inp_3.grid(row=3, column=1)
+    
+    label_4 = Label(menu, text="θ", font=("Arial", 25), width=20, height=5)
+    label_4.grid(row=4, column=0)
+    
+    inp_4 = tkinter.Entry(menu, width=30, font=("Arial", 25))
+    inp_4.grid(row=4, column=1)
+    
+    inp_5 = tkinter.Button(menu, text="Go back", width=15, font=("Arial", 15))
+    inp_5.grid(row=8, column=0)
+    
+    inp_6 = tkinter.Button (menu, text="Check", width=20, font=("Arial", 15), command=submitButton)
+    inp_6.grid(row=8, column=3)
+
         
-    question = input("Would you like to convert the radian value into degrees? (y/n): ")
-    if question == "y":
-        convertedAngle = angleRadians*(180/(math.pi))
-        print(r, convertedAngle)
-    else:
-        print(r, angleRadians)
+question()
 
-def cartesian_conversion():
-    question2 = input("Is the angle in degrees? (y/n): ")
-    if question2 == "y":
-        r = input("Please enter the value of r: ")
-        rfloat = float(r)
-        angleValue = input("Input the angle: ")
-        radCon = math.radians(float(angleValue))
-        x = rfloat*(math.cos(radCon))
-        y = rfloat*(math.sin(radCon))
-    else:
-        r = input("Please enter the value of r: ")
-        rfloat = float(r)
-        angleValue = input("Input the angle: ")
-        x = rfloat*(math.cos(float(angleValue)))
-        y = rfloat*(math.sin(float(angleValue)))
-    print(x, y)       
-
-choice = input("Choose a conversion \n 1. Cartesian to Polar coordinates. \n 2. Polar to Cartesian coordinates.\n")
-if choice == "1":
-    polar_conversion()
-elif choice == "2":
-    cartesian_conversion()
-else:
-    print("Those were the only two options...How about picking one of them? >:(")
-    
+menu.mainloop()
