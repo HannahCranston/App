@@ -1,6 +1,7 @@
 import tkinter as tk
 import webbrowser
 import math
+from tkinter import messagebox
 
 def open_window1():
     window1 = tk.Toplevel(root)
@@ -10,6 +11,8 @@ def open_window1():
     label1.pack()
     text1 = tk.Text(window1)
     text1.insert(tk.END, "This is Lesson 1 converting Cartesian to Polar \n\n Introduction \n - Cartesian coordinates define points on a plane using perpendicular axes (x, y)\nPolar coordinates represent points using a distance from the origin (r) and an angle (θ) from a reference direction.\n Explanation-\n\nThe distance r is found using the Pythagorean theorem, representing the length of the vector from the origin to the point.\nThe angle θ is determined using inverse tangent, considering the quadrant to ensure correct orientation.")
+    text1.insert(tk.END, "\n Representation: A point in polar coordinates is denoted as (r, θ), where:\n - r is the distance from the origin (or pole) to the point.\n- θ (theta) is the angle formed between the polar axis and the line segment connecting the origin to the point, measured in radians.")
+    text1.insert(tk.END, " Conversion: \n To convert from Cartesian coordinates (x, y) to polar coordinates:\n - r = √(x^2 + y^2)\n- θ = arctan(y / x)\n\nTo convert from polar coordinates (r, θ) to Cartesian coordinates:\n- x = r * cos(θ)\n- y = r * sin(θD)")
     text1.insert(tk.END, "\nUse Cases:\n\nCommonly used in physics, engineering, and navigation to describe positions and movements in polar systems.")
     text1.pack(expand=True, fill='both')
     window1.mainloop()
@@ -28,10 +31,21 @@ def open_window2():
     window2.mainloop()
 
 def open_link():
-    webbrowser.open_new("https://nucinkis-lab.cc.ic.ac.uk/HELM/HELM_Workbooks_16-20/WB17-all.pdf")    
-  
-# Main window
-root = tk.Tk()
+    webbrowser.open_new("https://nucinkis-lab.cc.ic.ac.uk/HELM/HELM_Workbooks_16-20/WB17-all.pdf")  
+
+def open_window3():
+    window3 = tk.Toplevel(root)
+    window3.title("Calculator for Polar and Carstein") 
+    window3.geometry("500x500")
+    label3 = tk.Label(window3, text="Polar to Carstian to convert from on to another")
+    label3.pack()
+    window3.mainloop()
+def open_flashcards():
+    flashcards = tk.Toplevel(root)
+    flashcards.title("Flashcards")
+    flashcards.geometry("500x500")
+    flashcards.mainloop()
+root = tk.Tk()  
 root.title("Polar Coorindate and Cartsian Coordinates")
 root.geometry("1000x1000")
 root.configure(background="grey")
@@ -42,13 +56,17 @@ button1.pack(pady=20)
 button2 = tk.Button(root, text="Open lesson 2", command=open_window2, font=("Arial", 12), background="blue", foreground="navy")
 button2.pack(pady=20)
 
-button3 = tk.Button(root, text="Open calculator", command=open_window2, font=("Arial", 12), background="blue", foreground="navy")
+button3 = tk.Button(root, text="Open calculator", command=open_window3, font=("Arial", 12), background="blue", foreground="navy")
 button3.pack(pady=20)
 
 link_button = tk.Button(root, text="Open link for more help ", command=open_link, font=("Arial", 12), background="lightblue", foreground="navy")
 link_button.pack(pady=40)
 
+flashcards_button = tk.Button(root, text="Open flashcards", command=open_flashcards, font=("Arial", 12), background="lightblue", foreground="navy")
+flashcards_button.pack(pady=40)
+
 root.mainloop()
+
 
     
 
