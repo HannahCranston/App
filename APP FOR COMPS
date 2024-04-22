@@ -35,7 +35,7 @@ def open_link():
 
 def open_window3():
     window3 = tk.Toplevel(root)
-    window3.title("Calculator for Polar and Carstein") 
+    window3.title("Here is the calculator which you can ue to conve Polar and Cartesian") 
     window3.geometry("500x500")
     label3 = tk.Label(window3, text="Polar to Carstian to convert from on to another")
     label3.pack()
