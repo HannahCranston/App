@@ -35,11 +35,57 @@ def open_link():
 
 def open_window3():
     window3 = tk.Toplevel(root)
-    window3.title("Here is the calculator which you can ue to conve Polar and Cartesian") 
+    window3.title("Calculator for Polar and Carstein")
     window3.geometry("500x500")
     label3 = tk.Label(window3, text="Polar to Carstian to convert from on to another")
     label3.pack()
-    window3.mainloop()
+ 
+    label3 = tk.Label(window3, text="Calculator for Polar and Cartesian Coordinates", font=("Arial", 12))
+    label3.pack(pady=10)
+
+    x_label = tk.Label(window3, text="x:")
+    x_label.pack()
+    x_entry = tk.Entry(window3)
+    x_entry.pack()
+
+    y_label = tk.Label(window3, text="y:")
+    y_label.pack()
+    y_entry = tk.Entry(window3)
+    y_entry.pack()
+
+    convert_button = tk.Button(window3, text="Convert to Polar: ", command=lambda: polar_conversion(x_entry.get(), y_entry.get()))
+    convert_button.pack()
+
+    convert_button2 = tk.Button(window3, text="Convert to Cartesian:", command=lambda: cartesian_conversion(x_entry.get(), y_entry.get()))
+    convert_button2.pack()
+
+def polar_conversion(x, y):
+    try:
+        floatx = float(x)
+        floaty = float(y)
+        r = math.sqrt(floatx**2 + floaty**2)
+        angleRadians = math.atan2(floaty, floatx)  
+        
+        convertedAngle = math.degrees(angleRadians)
+
+        messagebox.showinfo("Polar Coordinates", f"Polar Coordinates: (r={r}, θ={convertedAngle}°)")
+    except ValueError:
+        messagebox.showerror("Error", "Invalid input. Please enter valid numbers.")
+
+def cartesian_conversion(x, y):
+    try:
+        floatx = float(x)
+        floaty = float(y)
+        r = math.sqrt(floatx**2 + floaty**2)
+        angleRadians = math.atan2(floaty, floatx)  
+
+        x_cartesian = r * math.cos(angleRadians)
+        y_cartesian = r * math.sin(angleRadians)
+
+        messagebox.showinfo("Cartesian Coordinates", f"Cartesian Coordinates: (x={x_cartesian}, y={y_cartesian})")
+    except ValueError:
+        messagebox.showerror("Error", "Invalid input. Please enter valid numbers.")
+
 def open_flashcards():
     flashcards = tk.Toplevel(root)
     flashcards.title("Flashcards")
@@ -48,23 +94,25 @@ def open_flashcards():
 root = tk.Tk()  
 root.title("Polar Coorindate and Cartsian Coordinates")
 root.geometry("1000x1000")
-root.configure(background="grey")
-
-button1 = tk.Button(root, text="Open lesson 1", command=open_window1, font=("Arial", 12), background="blue", foreground="navy")
+root.configure(background="light blue")
+ 
+label = tk.Label(root, text="Polar and Cartesian Coordinates", font=("Arial 36 underline bold"), background="light blue", foreground="white")
+label.pack(pady=40)
+ 
+button1 = tk.Button(root, text="Open lesson 1", command=open_window1, font=("Arial", 18), background="teal", foreground="white")
 button1.pack(pady=20)
-
-button2 = tk.Button(root, text="Open lesson 2", command=open_window2, font=("Arial", 12), background="blue", foreground="navy")
+ 
+button2 = tk.Button(root, text="Open lesson 2", command=open_window2, font=("Arial", 18), background="teal", foreground="white")
 button2.pack(pady=20)
-
-button3 = tk.Button(root, text="Open calculator", command=open_window3, font=("Arial", 12), background="blue", foreground="navy")
+ 
+button3 = tk.Button(root, text="Open calculator", command=open_window3, font=("Arial", 18), background="teal", foreground="white")
 button3.pack(pady=20)
-
-link_button = tk.Button(root, text="Open link for more help ", command=open_link, font=("Arial", 12), background="lightblue", foreground="navy")
+ 
+link_button = tk.Button(root, text="Open link for more help ", command=open_link, font=("Arial", 18), background="teal", foreground="white")
 link_button.pack(pady=40)
-
-flashcards_button = tk.Button(root, text="Open flashcards", command=open_flashcards, font=("Arial", 12), background="lightblue", foreground="navy")
+ 
+flashcards_button = tk.Button(root, text="Open flashcards", command=open_flashcards, font=("Arial", 18), background="teal", foreground="white")
 flashcards_button.pack(pady=40)
-
 root.mainloop()
 
 
