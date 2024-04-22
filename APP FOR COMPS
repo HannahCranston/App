@@ -7,7 +7,7 @@ def open_window1():
     window1 = tk.Toplevel(root)
     window1.title("Lesson 1")
     window1.geometry("600x600")
-    label1 = tk.Label(window1, text="This is Lesson 1", font=("Arial", 12), bg="lightblue", fg="navy") 
+    label1 = tk.Label(window1, text="Welcome to Lesson 1. Here will be an initial breakdown of this topic, what it covers, and how it can apply in the real world", font=("Arial", 12), bg="lightblue", fg="navy") 
     label1.pack()
     text1 = tk.Text(window1)
     text1.insert(tk.END, "This is Lesson 1 converting Cartesian to Polar \n\n Introduction \n - Cartesian coordinates define points on a plane using perpendicular axes (x, y)\nPolar coordinates represent points using a distance from the origin (r) and an angle (θ) from a reference direction.\n Explanation-\n\nThe distance r is found using the Pythagorean theorem, representing the length of the vector from the origin to the point.\nThe angle θ is determined using inverse tangent, considering the quadrant to ensure correct orientation.")
