@@ -14,6 +14,8 @@ def open_window1():
     text1.insert(tk.END, "\n Representation: A point in polar coordinates is denoted as (r, θ), where:\n - r is the distance from the origin (or pole) to the point.\n- θ (theta) is the angle formed between the polar axis and the line segment connecting the origin to the point, measured in radians.")
     text1.insert(tk.END, " Conversion: \n To convert from Cartesian coordinates (x, y) to polar coordinates:\n - r = √(x^2 + y^2)\n- θ = arctan(y / x)\n\nTo convert from polar coordinates (r, θ) to Cartesian coordinates:\n- x = r * cos(θ)\n- y = r * sin(θD)")
     text1.insert(tk.END, "\nUse Cases:\n\nCommonly used in physics, engineering, and navigation to describe positions and movements in polar systems.")
+    text1.insert(tk.END,"arctan(𝑦/𝑥) if 𝑥 > 0 \n arctan(𝑦/x) + 𝜋 if 𝑥 < 0 and 𝑦 ≥ 0 \n arctan(𝑦/𝑥) 𝜋 if 𝑥 < 0 and 𝑦 < 0")
+    text1.insert(tk.END,"𝜋/2 if 𝑥 = 0 and 𝑦 > 0 −𝜋/2 \n if 𝑥 = 0 and 𝑦 < 0 \n undefined if 𝑥 = 0 and 𝑦 = 0")
     text1.pack(expand=True, fill='both')
     window1.mainloop()
 
@@ -38,17 +40,18 @@ def open_window3():
     window3.title("Calculator for Polar and Carstein")
     window3.geometry("500x500")
     label3 = tk.Label(window3, text="Polar to Carstian to convert from on to another")
+    label3 = tk.Label(window3, text="Input your values of x and y or r and theta in the designated boxes.\n Click the button below for your desired conversion:")
     label3.pack()
  
     label3 = tk.Label(window3, text="Calculator for Polar and Cartesian Coordinates", font=("Arial", 12))
     label3.pack(pady=10)
 
-    x_label = tk.Label(window3, text="x:")
+    x_label = tk.Label(window3, text="x: \ Radius: ")
     x_label.pack()
     x_entry = tk.Entry(window3)
     x_entry.pack()
 
-    y_label = tk.Label(window3, text="y:")
+    y_label = tk.Label(window3, text="y: \ Degrees number: ")
     y_label.pack()
     y_entry = tk.Entry(window3)
     y_entry.pack()
@@ -86,11 +89,19 @@ def cartesian_conversion(x, y):
     except ValueError:
         messagebox.showerror("Error", "Invalid input. Please enter valid numbers.")
 
-def open_flashcards():
-    flashcards = tk.Toplevel(root)
-    flashcards.title("Flashcards")
-    flashcards.geometry("500x500")
-    flashcards.mainloop()
+def open_window4():
+    window4 = tk.Toplevel(root)
+    window4.title("Lesson 2")
+    window4.geometry("500x500")
+    label4 = tk.Label(window4, text="Flashcards", font=("Arial", 20), bg="lightblue", fg="navy")
+    label4.pack()
+    text4 = tk.Text(window4)
+    text4.insert(tk.END,"You can use these flashcards to memorise what operation you need to use when converting your cartesian coordinates into an angle\n ")
+    text4.insert(tk.END,"arctan(𝑦/𝑥) if 𝑥 > 0 \n arctan(𝑦/x) + 𝜋 if 𝑥 < 0 and 𝑦 ≥ 0 \n arctan(𝑦/𝑥) 𝜋 if 𝑥 < 0 and 𝑦 < 0")
+    text4.insert(tk.END,"𝜋/2 if 𝑥 = 0 and 𝑦 > 0 −𝜋/2 \n if 𝑥 = 0 and 𝑦 < 0 \n undefined if 𝑥 = 0 and 𝑦 = 0")
+    text4.pack(expand=True, fill='both')
+    window4.mainloop()
+    
 root = tk.Tk()  
 root.title("Polar Coorindate and Cartsian Coordinates")
 root.geometry("1000x1000")
@@ -111,8 +122,8 @@ button3.pack(pady=20)
 link_button = tk.Button(root, text="Open link for more help ", command=open_link, font=("Arial", 18), background="teal", foreground="white")
 link_button.pack(pady=40)
  
-flashcards_button = tk.Button(root, text="Open flashcards", command=open_flashcards, font=("Arial", 18), background="teal", foreground="white")
-flashcards_button.pack(pady=40)
+button4 = tk.Button(root, text="Open flashcards", command=open_window4, font=("Arial", 18), background="teal", foreground="white")
+button4.pack(pady=40)
 root.mainloop()
 
 
