@@ -1,7 +1,10 @@
 import tkinter as tk
 import webbrowser
 import math
+import matplotlib.pyplot as plt
+import numpy as np
 from tkinter import messagebox
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 def open_window1():
     window1 = tk.Toplevel(root)
@@ -138,10 +141,35 @@ def create_flashcard(window, text):
     label = tk.Label(frame, text=text, font=("Arial", 12), fg="navy", wraplength=400, justify=tk.LEFT)
     label.pack(padx=10, pady=5)
     
+def polar_graph():
+    fig = plt.figure()
+    ax = fig.add_subplot(projection="polar", facecolor="lightgoldenrodyellow")
+    r = np.linspace(0, 3, 301)
+    theta = 2 * np.pi * r
+    ax.plot(theta, r, color="tab:orange", lw=3, label="a line")
+    ax.plot(0.5 * theta, r, color="tab:blue", ls="--", lw=3, label="another line")
+    ax.tick_params(grid_color="palegoldenrod")
+    angle = np.deg2rad(67.5)
+    ax.legend(loc="lower left",
+          bbox_to_anchor=(.5 + np.cos(angle)/2, .5 + np.sin(angle)/2))
+    plt.show()   
+
+def cartesian_graph():
+      import matplotlib.pyplot as plt
+      import numpy as np
+      plt.style.use('_mpl-gallery')
+      x = np.linspace(0, 10, 100)
+      y = 4 + 2 * np.sin(2 * x)
+      fig, ax = plt.subplots()
+      ax.plot(x, y, linewidth=2.0)
+      ax.set(xlim=(0, 8), xticks=np.arange(1, 8),
+       ylim=(0, 8), yticks=np.arange(1, 8))
+      plt.show()
+      
 def open_window5():
     window5 = tk.Toplevel(root)
     window5.title("Calculator for Polar and Cartesian")
-    window5.geometry("500x500")
+    window5.geometry("800x600")
 
     instruction_label = tk.Label(window5, text="Input your values of x and y or r and theta in the designated boxes.\nClick the button below for your desired conversion:")
     instruction_label.pack()
@@ -159,39 +187,59 @@ def open_window5():
     y_entry = tk.Entry(window5)
     y_entry.pack()
 
+    def polar_conversion():
+        try:
+            floatx = float(x_entry.get())
+            floaty = float(y_entry.get())
+            r = math.sqrt(floatx**2 + floaty**2)
+            angleRadians = math.atan2(floaty, floatx)  
+            convertedAngle = math.degrees(angleRadians)
 
-    convert_button = tk.Button(window5, text="Convert to Polar show on Graph", command=lambda: polar_conversion(x_entry.get(), y_entry.get()))
+            messagebox.showinfo("Polar Coordinates", f"Polar Coordinates: (r={r}, θ={convertedAngle}°)")
+
+            # Plot polar graph
+            polar_fig = plt.figure()
+            polar_ax = polar_fig.add_subplot(111, polar=True)
+            r_values = np.linspace(0, 3, 301)
+            theta_values = 2 * np.pi * r_values
+            polar_ax.plot(theta_values, r_values, color="tab:orange", lw=3, label="a line")
+            polar_ax.plot(0.5 * theta_values, r_values, color="tab:blue", ls="--", lw=3, label="another line")
+            polar_ax.legend()
+            polar_canvas = FigureCanvasTkAgg(polar_fig, master=window5)
+            polar_canvas.draw()
+            polar_canvas.get_tk_widget().pack()
+        except ValueError:
+            messagebox.showerror("Error", "Invalid input. Please enter valid numbers for x and y.")
+
+    def cartesian_conversion():
+        try:
+            floatx = float(x_entry.get())
+            floaty = float(y_entry.get())
+            r = math.sqrt(floatx**2 + floaty**2)
+            angleRadians = math.atan2(floaty, floatx)  
+
+            x_cartesian = r * math.cos(angleRadians)
+            y_cartesian = r * math.sin(angleRadians)
+
+            messagebox.showinfo("Cartesian Coordinates", f"Cartesian Coordinates: (x={x_cartesian}, y={y_cartesian})")
+
+            # Plot Cartesian graph
+            cartesian_fig, cartesian_ax = plt.subplots()
+            x_values = np.linspace(0, 10, 100)
+            y_values = 4 + 2 * np.sin(2 * x_values)
+            cartesian_ax.plot(x_values, y_values, linewidth=2.0)
+            cartesian_ax.set(xlim=(0, 8), xticks=np.arange(1, 8), ylim=(0, 8), yticks=np.arange(1, 8))
+            cartesian_canvas = FigureCanvasTkAgg(cartesian_fig, master=window5)
+            cartesian_canvas.draw()
+            cartesian_canvas.get_tk_widget().pack()
+        except ValueError:
+            messagebox.showerror("Error", "Invalid input. Please enter valid numbers for x and y.")
+
+    convert_button = tk.Button(window5, text="Convert to Polar and Show Graph", command=polar_conversion)
     convert_button.pack()
 
-    convert_button2 = tk.Button(window5, text="Convert to Cartesian show on graph", command=lambda: cartesian_conversion(x_entry.get(), y_entry.get()))
+    convert_button2 = tk.Button(window5, text="Convert to Cartesian and Show Graph", command=cartesian_conversion)
     convert_button2.pack()
-
-def polar_conversion(x, y):
-    try:
-        floatx = float(x)
-        floaty = float(y)
-        r = math.sqrt(floatx**2 + floaty**2)
-        angleRadians = math.atan2(floaty, floatx)  
-        
-        convertedAngle = math.degrees(angleRadians)
-
-        messagebox.showinfo("Polar Coordinates", f"Polar Coordinates: (r={r}, θ={convertedAngle}°)")
-    except ValueError:
-        messagebox.showerror("Error", "Invalid input. Please enter valid numbers.")
-
-def cartesian_conversion(x, y):
-    try:
-        floatx = float(x)
-        floaty = float(y)
-        r = math.sqrt(floatx**2 + floaty**2)
-        angleRadians = math.atan2(floaty, floatx)  
-
-        x_cartesian = r * math.cos(angleRadians)
-        y_cartesian = r * math.sin(angleRadians)
-
-        messagebox.showinfo("Cartesian Coordinates", f"Cartesian Coordinates: (x={x_cartesian}, y={y_cartesian})")
-    except ValueError:
-        messagebox.showerror("Error", "Invalid input. Please enter valid numbers.") 
     
 root = tk.Tk()  
 root.title("Polar Coorindate and Cartsian Coordinates")
@@ -210,7 +258,7 @@ button2.pack(pady=20)
 button3 = tk.Button(root, text="Open calculator", command=open_window3, font=("Arial", 18), background="teal", foreground="black")
 button3.pack(pady=20)
 
-button5 = tk.Button(root, text="Open visulastor", command=open_window5, font=("Arial", 18), background="teal", foreground="black")
+button5 = tk.Button(root, text="Open polar graph", command=open_window5, font=("Arial", 18), background="teal", foreground="black")
 button5.pack(pady=20)
  
 link_button = tk.Button(root, text="Open link for more help ", command=open_link, font=("Arial", 18), background="teal", foreground="black")
